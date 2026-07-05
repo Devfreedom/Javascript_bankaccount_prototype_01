@@ -43,13 +43,14 @@ class bankAccount {
 }
 let freedom = new bankAccount("freedom", 10000)
 let charles = new bankAccount("charles", 2000)
+Object.freeze(charles)
 charles.accounttype = "savings account";
 
 freedom.withdraw(100)
 freedom.withdraw(100)
 freedom.withdraw(100)
 freedom.withdraw(100)
-freedom.transfer(1000, charles, "current account")
+freedom.transfer(1000, charles, "savings account")
 // freedom.deposit(1000)
 console.log(freedom)
 console.log(charles)
