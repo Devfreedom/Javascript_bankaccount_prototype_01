@@ -9,11 +9,15 @@ class bankAccount {
         let digits = Math.floor(Math.random() * Math.pow(10, length)).toString();
         return digits
     }
-    transfer(amount, recipentAccountno) {
+    transfer(amount, recipentAccountno, accounttype) {
         if (amount <= this.balance) {
-            this.balance -= amount;
-            recipentAccountno.balance += amount;
-            console.log(`Successfully transferred $${amount} to Account ${recipentAccountno.accountNumber}`);
+            if (accounttype == recipentAccountno.accounttype) {
+                this.balance -= amount;
+                recipentAccountno.balance += amount;
+                console.log(`Successfully transferred $${amount} to Account ${recipentAccountno.accountNumber}`);
+            }else{
+                console.log("Transaction failed invalid account type")
+            }
         } else {
             console.log("Transaction failed: Insufficient funds.");
         }
@@ -39,11 +43,13 @@ class bankAccount {
 }
 let freedom = new bankAccount("freedom", 10000)
 let charles = new bankAccount("charles", 2000)
+charles.accounttype = "savings account";
+
 freedom.withdraw(100)
 freedom.withdraw(100)
 freedom.withdraw(100)
 freedom.withdraw(100)
-freedom.transfer(1000, charles)
+freedom.transfer(1000, charles, "current account")
 // freedom.deposit(1000)
 console.log(freedom)
 console.log(charles)
