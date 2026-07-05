@@ -9,6 +9,9 @@ class bankAccount {
         let digits = Math.floor(Math.random() * Math.pow(10, length)).toString();
         return digits
     }
+    transfer(amount, recipentAccountno){
+  
+    }
     deposit(money) {
         return this.balance += money
     }
@@ -26,6 +29,7 @@ class bankAccount {
             console.log("Account frozen")
         }
     }
+
 }
 let freedom = new bankAccount("freedom", 10000)
 freedom.withdraw(100)
