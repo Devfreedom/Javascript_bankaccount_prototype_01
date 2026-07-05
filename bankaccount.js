@@ -1,14 +1,3 @@
-// function generateAccountNumber(length = 10) {
-//   // Generate random digits up to the requested length
-//   const digits = Math.floor(Math.random() * Math.pow(10, length)).toString();
-
-//   // Pad with leading zeros if the number is too short
-//   console.log(digits.padStart(length, '0'))
-// }
-
-// generateAccountNumber(); 
-// generateAccountNumber();
-
 class bankAccount {
     constructor(name, balance, accountnumber) {
         this.name = name;
