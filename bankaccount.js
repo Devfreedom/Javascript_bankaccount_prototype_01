@@ -9,8 +9,14 @@ class bankAccount {
         let digits = Math.floor(Math.random() * Math.pow(10, length)).toString();
         return digits
     }
-    transfer(amount, recipentAccountno){
-  
+    transfer(amount, recipentAccountno) {
+        if (amount <= this.balance) {
+            this.balance -= amount;
+            recipentAccountno.balance += amount;
+            console.log(`Successfully transferred $${amount} to Account ${recipientAccount.accountNumber}`);
+        } else {
+            console.log("Transaction failed: Insufficient funds.");
+        }
     }
     deposit(money) {
         return this.balance += money
@@ -19,7 +25,7 @@ class bankAccount {
         if (money <= this.balance) {
             this.balance -= money
 
-        } else if(money > this.balance) {
+        } else if (money > this.balance) {
             console.log(`Insufficent balance`)
         }
 
