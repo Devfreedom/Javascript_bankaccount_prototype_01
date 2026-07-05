@@ -13,7 +13,7 @@ class bankAccount {
         if (amount <= this.balance) {
             this.balance -= amount;
             recipentAccountno.balance += amount;
-            console.log(`Successfully transferred $${amount} to Account ${recipientAccount.accountNumber}`);
+            console.log(`Successfully transferred $${amount} to Account ${recipentAccountno.accountNumber}`);
         } else {
             console.log("Transaction failed: Insufficient funds.");
         }
@@ -38,9 +38,12 @@ class bankAccount {
 
 }
 let freedom = new bankAccount("freedom", 10000)
+let charles = new bankAccount("charles", 2000)
 freedom.withdraw(100)
 freedom.withdraw(100)
 freedom.withdraw(100)
 freedom.withdraw(100)
+freedom.transfer(1000, charles)
 // freedom.deposit(1000)
 console.log(freedom)
+console.log(charles)
