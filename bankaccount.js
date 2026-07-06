@@ -1,8 +1,9 @@
 class bankAccount {
-    constructor(name, balance, accountnumber) {
+    constructor(name, balance, userstatus, accountnumber) {
         this.name = name;
         this.balance = balance;
-        this.accountnumber = this.generateAccountno()
+        this.userstatus = userstatus
+        this.accountnumber = this.generateAccountno();
     }
     // accountnumber = [];
     generateAccountno(length = 10) {
@@ -12,10 +13,14 @@ class bankAccount {
     transfer(amount, recipentAccountno, accounttype) {
         if (amount <= this.balance) {
             if (accounttype == recipentAccountno.accounttype) {
-                this.balance -= amount;
-                recipentAccountno.balance += amount;
-                console.log(`Successfully transferred $${amount} to Account ${recipentAccountno.accountNumber}`);
-            }else{
+                if (recipentAccountno.userstatus === "active") {
+                    this.balance -= amount;
+                    recipentAccountno.balance += amount;
+                    console.log(`Successfully transferred $${amount} to ${recipentAccountno.name}`);
+                }else{
+                    console.log(`this account is already deactivated`)
+                }
+            } else {
                 console.log("Transaction failed invalid account type")
             }
         } else {
@@ -34,16 +39,23 @@ class bankAccount {
         }
 
     }
-    freezeaccount() {
-        if (this.withdraw < 3) {
-            console.log("Account frozen")
+    userstatus(name) {
+        if (name.userstatus === active) {
+            return "Bank user active"
+        } else {
+            return "bankk user inactive"
         }
     }
+    deactivateAccount() {
+        this.userstatus = "inactive"
+    }
+
 
 }
-let freedom = new bankAccount("freedom", 10000)
-let charles = new bankAccount("charles", 2000)
-Object.freeze(charles)
+let freedom = new bankAccount("freedom", 10000, "active")
+let charles = new bankAccount("charles", 2000, "active")
+// Object.freeze(charles)
+charles.deactivateAccount()
 charles.accounttype = "savings account";
 
 freedom.withdraw(100)
