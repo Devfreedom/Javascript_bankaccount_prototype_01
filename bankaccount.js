@@ -13,11 +13,11 @@ class bankAccount {
     transfer(amount, recipentAccountno, accounttype) {
         if (amount <= this.balance) {
             if (accounttype == recipentAccountno.accounttype) {
-                if (recipentAccountno.userstatus === "active") {
+                if (recipentAccountno.userstatus === "active" && this.userstatus === "active") {
                     this.balance -= amount;
                     recipentAccountno.balance += amount;
-                    console.log(`Successfully transferred $${amount} to ${recipentAccountno.name}`);
-                }else{
+                    console.log(`Successfully transferred ${amount} naira to ${recipentAccountno.name}`);
+                } else {
                     console.log(`this account is already deactivated`)
                 }
             } else {
@@ -28,13 +28,21 @@ class bankAccount {
         }
     }
     deposit(money) {
-        return this.balance += money
+        if (this.userstatus == "active") {
+            return this.balance += money
+        } else {
+            console.log(`Transaction failed: Your account has been deactivated`)
+        }
     }
     withdraw(money) {
         if (money <= this.balance) {
-            this.balance -= money
+            if (this.userstatus == "active") {
+                this.balance -= money
+            }else{
+                console.log(`Transaction failed: Your account has been deactivated`)
+            }
 
-        } else if (money > this.balance) {
+        } else{
             console.log(`Insufficent balance`)
         }
 
@@ -53,16 +61,14 @@ class bankAccount {
 
 }
 let freedom = new bankAccount("freedom", 10000, "active")
-let charles = new bankAccount("charles", 2000, "active")
-// Object.freeze(charles)
-charles.deactivateAccount()
+freedom.accounttype = "current account"
+let charles = new bankAccount("charles", 0, "active")
 charles.accounttype = "savings account";
+// Object.freeze(charles)
+// freedom.deactivateAccount()
 
-freedom.withdraw(100)
-freedom.withdraw(100)
-freedom.withdraw(100)
-freedom.withdraw(100)
-freedom.transfer(1000, charles, "savings account")
-// freedom.deposit(1000)
+freedom.deposit(1000000)
+freedom.withdraw(10000)
+freedom.transfer(500000, charles, "savings account")
 console.log(freedom)
 console.log(charles)
